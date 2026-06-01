@@ -102,9 +102,27 @@ img{max-width:100%}
   border:3px solid rgba(25,179,196,.5);border-top-color:var(--cyan);
   animation:spin 6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.dial-value{font-size:2.6rem;font-weight:800;color:#fff}
-.dial-value span{color:var(--cyan)}
-.dial-label{font-size:.8rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.08em}
+.cmc-slides{position:relative;width:100%;height:100px;display:flex;align-items:center;justify-content:center}
+.cmc-slide{position:absolute;text-align:center;opacity:0;
+  animation:cmcCycle 15s ease-in-out infinite}
+.cmc-slide:nth-child(1){animation-delay:0s}
+.cmc-slide:nth-child(2){animation-delay:2.5s}
+.cmc-slide:nth-child(3){animation-delay:5s}
+.cmc-slide:nth-child(4){animation-delay:7.5s}
+.cmc-slide:nth-child(5){animation-delay:10s}
+.cmc-slide:nth-child(6){animation-delay:12.5s}
+@keyframes cmcCycle{
+  0%,13.3%{opacity:1;transform:translateY(0)}
+  16.7%,100%{opacity:0;transform:translateY(-8px)}
+}
+.cmc-value{font-size:2.2rem;font-weight:800;color:#fff;line-height:1.1}
+.cmc-value span{color:var(--cyan);font-size:1rem;margin-left:4px}
+.cmc-label{font-size:.75rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.cmc-subtitle{position:absolute;bottom:24px;font-size:.65rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em}
+@media(prefers-reduced-motion:reduce){
+  .cmc-slide{animation:none}
+  .cmc-slide:first-child{opacity:1}
+}
 
 /* ---- stats ---- */
 .stats{background:var(--white);margin-top:-36px;position:relative;z-index:5}
@@ -374,7 +392,7 @@ img{max-width:100%}
   .hero-inner{padding:52px 18px}
   .container{padding:0 18px}
   .dial{width:200px;height:200px}
-  .dial-value{font-size:2.2rem}
+  .cmc-value{font-size:2rem}
   .accred-flash{width:210px;height:200px}
   .footer-grid{grid-template-columns:1fr}
 }
@@ -382,6 +400,6 @@ img{max-width:100%}
 @media(max-width:360px){
   .stats-grid{grid-template-columns:1fr}
   .dial,.accred-flash{width:170px;height:170px}
-  .dial-value{font-size:1.9rem}
+  .cmc-value{font-size:1.7rem}
   .hero-actions .btn{width:100%;text-align:center}
 }

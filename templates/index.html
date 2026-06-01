@@ -23,8 +23,33 @@
     <div class="hero-card">
       <div class="dial">
         <div class="dial-ring"></div>
-        <div class="dial-value">±0.01<span>°</span></div>
-        <div class="dial-label">Measured precision</div>
+        <div class="cmc-slides">
+          <div class="cmc-slide">
+            <div class="cmc-value">±0.21<span>°C</span></div>
+            <div class="cmc-label">Temperature</div>
+          </div>
+          <div class="cmc-slide">
+            <div class="cmc-value">±1.2<span>%RH</span></div>
+            <div class="cmc-label">Humidity</div>
+          </div>
+          <div class="cmc-slide">
+            <div class="cmc-value">±3.0<span>mbar</span></div>
+            <div class="cmc-label">Pressure</div>
+          </div>
+          <div class="cmc-slide">
+            <div class="cmc-value">±0.0006<span>g</span></div>
+            <div class="cmc-label">Weighing</div>
+          </div>
+          <div class="cmc-slide">
+            <div class="cmc-value">±17<span>mg</span></div>
+            <div class="cmc-label">Mass</div>
+          </div>
+          <div class="cmc-slide">
+            <div class="cmc-value">±0.25<span>s</span></div>
+            <div class="cmc-label">Time</div>
+          </div>
+        </div>
+        <div class="cmc-subtitle">Best CMC Capability</div>
       </div>
       <div class="accred-flash" aria-label="Accreditations: SAC-SINGLAS, bizSAFE Level 3 and Weights & Measures ACCURACY Label">
         <img class="af-1" src="{{ url_for('static', filename='img/sac-singlas.png') }}"

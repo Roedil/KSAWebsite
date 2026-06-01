@@ -4,3 +4,5 @@ __pycache__/
 venv/
 *.log
 .env
+_email_preview.*
+_vidframes/

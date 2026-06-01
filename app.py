@@ -3,6 +3,7 @@ import json
 import os
 import urllib.error
 import urllib.request
+from html import escape
 
 from flask import Flask, render_template, request, redirect, url_for, flash
 
@@ -28,19 +29,62 @@ def send_inquiry_email(name, email, message, company=""):
         app.logger.warning("RESEND_API_KEY not set — inquiry logged but not emailed.")
         return False
 
+    # --- Plain-text version (fallback) ---
     company_line = f"Company: {company}\n" if company else ""
-    text = (f"New inquiry from the KSA Metrology website\n\n"
-            f"Name:  {name}\n"
-            f"Email: {email}\n"
-            f"{company_line}\n"
-            f"Message:\n{message}\n")
-    company_html = (f"<strong>Company:</strong> {company}<br>" if company else "")
-    html = (f"<h2>New website inquiry</h2>"
-            f"<p><strong>Name:</strong> {name}<br>"
-            f"<strong>Email:</strong> <a href='mailto:{email}'>{email}</a><br>"
-            f"{company_html}</p>"
-            f"<p><strong>Message:</strong></p>"
-            f"<p style='white-space:pre-wrap'>{message}</p>")
+    text = ("KSA METROLOGY PTE LTD — New website inquiry\n"
+            "----------------------------------------\n\n"
+            f"Name:    {name}\n"
+            f"Email:   {email}\n"
+            f"{company_line}"
+            "\nMessage:\n"
+            f"{message}\n\n"
+            "----------------------------------------\n"
+            f"Reply directly to this email to respond to {name}.\n")
+
+    # --- HTML version (formal, Arial, table-based for email-client safety) ---
+    e_name, e_email, e_company = escape(name), escape(email), escape(company)
+    e_message = escape(message)
+    label = ("padding:11px 0;color:#5b6b82;font-size:14px;width:110px;"
+             "border-bottom:1px solid #eef2f7;vertical-align:top;")
+    value = ("padding:11px 0;color:#0b2545;font-size:14px;"
+             "border-bottom:1px solid #eef2f7;vertical-align:top;")
+    company_row = (
+        f'<tr><td style="{label}">Company</td>'
+        f'<td style="{value}">{e_company}</td></tr>') if company else ""
+
+    html = f"""\
+<div style="margin:0;padding:24px 0;background:#f4f7fb;font-family:Arial,Helvetica,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f7fb;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0"
+             style="max-width:600px;width:100%;background:#ffffff;border:1px solid #e6ebf2;border-radius:10px;overflow:hidden;">
+        <tr><td style="background:#0b2545;padding:22px 28px;font-family:Arial,Helvetica,sans-serif;">
+          <div style="color:#ffffff;font-size:18px;font-weight:bold;letter-spacing:.2px;">KSA Metrology Pte Ltd</div>
+          <div style="color:#9fc0e8;font-size:13px;margin-top:3px;">New website inquiry</div>
+        </td></tr>
+        <tr><td style="padding:26px 28px 6px;font-family:Arial,Helvetica,sans-serif;color:#13315c;font-size:15px;line-height:1.5;">
+          You have received a new inquiry from the website contact form:
+        </td></tr>
+        <tr><td style="padding:10px 28px 4px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+                 style="font-family:Arial,Helvetica,sans-serif;border-collapse:collapse;">
+            <tr><td style="{label}">Name</td><td style="{value}font-weight:bold;">{e_name}</td></tr>
+            <tr><td style="{label}">Email</td>
+                <td style="{value}"><a href="mailto:{e_email}" style="color:#1f6feb;text-decoration:none;">{e_email}</a></td></tr>
+            {company_row}
+          </table>
+        </td></tr>
+        <tr><td style="padding:20px 28px 8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#5b6b82;text-transform:uppercase;letter-spacing:.6px;">Message</td></tr>
+        <tr><td style="padding:0 28px 26px;">
+          <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#13315c;line-height:1.65;background:#f4f7fb;border-left:3px solid #1f6feb;border-radius:6px;padding:14px 16px;white-space:pre-wrap;">{e_message}</div>
+        </td></tr>
+        <tr><td style="background:#f7f9fc;padding:16px 28px;border-top:1px solid #e6ebf2;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#8a98a8;line-height:1.5;">
+          Reply directly to this email to respond to {e_name}.<br>Sent from kalibratesolutions.com
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</div>"""
     payload = {
         "from": CONTACT_FROM,
         "to": [CONTACT_TO],

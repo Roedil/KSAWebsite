@@ -56,29 +56,6 @@
   </div>
 </section>
 
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Full Service Range</span>
-      <h2>Everything we calibrate &amp; validate</h2>
-    </div>
-    <div class="cards">
-      {% for svc in services %}
-      <article class="card{{ ' featured' if svc.featured }}">
-        <div class="card-icon icon-{{ svc.icon }}"></div>
-        <h3>{{ svc.title }}</h3>
-        <p>{{ svc.desc }}</p>
-        {% if svc.tags %}
-        <ul class="card-tags">
-          {% for t in svc.tags %}<li>{{ t }}</li>{% endfor %}
-        </ul>
-        {% endif %}
-      </article>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
 <section class="section">
   <div class="container">
     <div class="section-head">

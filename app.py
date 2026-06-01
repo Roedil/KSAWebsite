@@ -53,7 +53,11 @@ def send_inquiry_email(name, email, message, company=""):
         "https://api.resend.com/emails",
         data=json.dumps(payload).encode("utf-8"),
         headers={"Authorization": f"Bearer {RESEND_API_KEY}",
-                 "Content-Type": "application/json"},
+                 "Content-Type": "application/json",
+                 # Cloudflare (in front of api.resend.com) blocks the default
+                 # "Python-urllib" UA with error 1010 — send a real UA.
+                 "User-Agent": "KSA-Website/1.0",
+                 "Accept": "application/json"},
         method="POST",
     )
     try:

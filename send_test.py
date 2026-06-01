@@ -31,7 +31,9 @@ req = urllib.request.Request(
     "https://api.resend.com/emails",
     data=json.dumps(payload).encode("utf-8"),
     headers={"Authorization": f"Bearer {API_KEY}",
-             "Content-Type": "application/json"},
+             "Content-Type": "application/json",
+             "User-Agent": "KSA-Website/1.0",
+             "Accept": "application/json"},
     method="POST",
 )
 print(f"from: {CONTACT_FROM}")

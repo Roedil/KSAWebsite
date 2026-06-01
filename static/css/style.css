@@ -118,7 +118,8 @@ img{max-width:100%}
 .cmc-value{font-size:2.2rem;font-weight:800;color:#fff;line-height:1.1}
 .cmc-value span{color:var(--cyan);font-size:1rem;margin-left:4px}
 .cmc-label{font-size:.75rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
-.cmc-subtitle{position:absolute;bottom:24px;font-size:.65rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em}
+.cmc-subtitle{position:absolute;bottom:20px;font-size:.65rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;text-align:center;line-height:1.2}
+.cmc-subtitle span{display:block;font-size:.55rem;letter-spacing:.15em;margin-bottom:1px}
 @media(prefers-reduced-motion:reduce){
   .cmc-slide{animation:none}
   .cmc-slide:first-child{opacity:1}

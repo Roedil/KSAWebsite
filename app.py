@@ -1,11 +1,66 @@
 """KSA Metrology Pte Ltd — company website (Flask)."""
+import json
 import os
+import urllib.error
+import urllib.request
 
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
 # In production set SECRET_KEY via an environment variable.
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "ksa-metrology-dev-key-change-me")
+
+# --- Email delivery (Resend HTTP API; works on Render where SMTP is blocked) ---
+# Set these as environment variables in Render (Environment tab):
+#   RESEND_API_KEY  — your Resend API key (required to actually send mail)
+#   CONTACT_TO      — recipient inbox (defaults to the company enquiry address)
+#   CONTACT_FROM    — verified sender (defaults to inquiry@kalibratesolutions.com).
+#                     The kalibratesolutions.com domain must be verified in Resend.
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+CONTACT_TO = os.environ.get("CONTACT_TO", "inquiry@kalibratesolutions.com")
+CONTACT_FROM = os.environ.get("CONTACT_FROM",
+                              "KSA Metrology Website <inquiry@kalibratesolutions.com>")
+
+
+def send_enquiry_email(name, email, message):
+    """Send a contact enquiry through the Resend API. Returns True on success."""
+    if not RESEND_API_KEY:
+        app.logger.warning("RESEND_API_KEY not set — enquiry logged but not emailed.")
+        return False
+
+    text = (f"New enquiry from the KSA Metrology website\n\n"
+            f"Name:  {name}\n"
+            f"Email: {email}\n\n"
+            f"Message:\n{message}\n")
+    html = (f"<h2>New website enquiry</h2>"
+            f"<p><strong>Name:</strong> {name}<br>"
+            f"<strong>Email:</strong> <a href='mailto:{email}'>{email}</a></p>"
+            f"<p><strong>Message:</strong></p>"
+            f"<p style='white-space:pre-wrap'>{message}</p>")
+    payload = {
+        "from": CONTACT_FROM,
+        "to": [CONTACT_TO],
+        "reply_to": email,
+        "subject": f"New website enquiry from {name}",
+        "text": text,
+        "html": html,
+    }
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Authorization": f"Bearer {RESEND_API_KEY}",
+                 "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return 200 <= resp.status < 300
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", "ignore")
+        app.logger.error("Resend API error %s: %s", exc.code, body)
+    except Exception as exc:  # noqa: BLE001 — never let email failure 500 the form
+        app.logger.error("Resend send failed: %s", exc)
+    return False
 
 # --- Company data (single source of truth, shared with all templates) -------
 COMPANY = {
@@ -178,9 +233,9 @@ def contact():
             flash("Please fill in your name, email and message.", "error")
             return redirect(url_for("contact"))
 
-        # Log the enquiry. (No outbound SMTP — wire up an email provider API
-        # such as SendGrid/Mailgun later if delivery is required.)
+        # Always log the enquiry as a backup, then email it via Resend.
         app.logger.info("Enquiry from %s <%s>: %s", name, email, message)
+        send_enquiry_email(name, email, message)
         flash("Thank you! Your enquiry has been received — we'll be in touch shortly.",
               "success")
         return redirect(url_for("contact"))

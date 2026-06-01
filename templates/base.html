@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ company.name }}{% endblock %}</title>
+  <meta name="description" content="{{ company.name }} — SAC-SINGLAS accredited ({{ company.sac_no }}), ISO/IEC 17025 calibration, validation and technical support for pharmaceutical, logistics, food and manufacturing industries in Singapore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32.png') }}">
+  <link rel="icon" type="image/png" sizes="256x256" href="{{ url_for('static', filename='img/favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="{{ url_for('index') }}">
+        <img class="brand-logo" src="{{ url_for('static', filename='img/ksa-logo.png') }}" alt="{{ company.name }} logo">
+        <span class="brand-text">
+          <strong>{{ company.name }}</strong>
+        </span>
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </label>
+      <nav class="site-nav">
+        <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">Home</a>
+        <a href="{{ url_for('about') }}" class="{{ 'active' if request.endpoint == 'about' }}">About</a>
+        <a href="{{ url_for('services') }}" class="{{ 'active' if request.endpoint == 'services' }}">Services</a>
+        <a href="{{ url_for('contact') }}" class="{{ 'active' if request.endpoint == 'contact' }}">Contact</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-primary nav-cta">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="container flash-wrap">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand brand-footer">
+          <img class="brand-logo brand-logo-footer" src="{{ url_for('static', filename='img/ksa-logo.png') }}" alt="{{ company.name }} logo">
+          <span class="brand-text"><strong>{{ company.name }}</strong></span>
+        </div>
+        <p class="footer-blurb">{{ company.tagline }}. Trusted by {{ company.clients }} clients across the region.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+      </div>
+      <div>
+        <h4>Get in Touch</h4>
+        <a href="tel:{{ company.phone_href }}">📞 {{ company.phone }}</a>
+        <a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">💬 WhatsApp {{ company.whatsapp }}</a>
+        <a href="mailto:{{ company.email }}">✉ {{ company.email }}</a>
+        <p class="footer-address">📍 {{ company.address }}</p>
+        <div class="social">
+          <a href="{{ company.facebook }}" target="_blank" rel="noopener">Facebook</a>
+          <a href="{{ company.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; {{ 2026 }} {{ company.name }}. All rights reserved.</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

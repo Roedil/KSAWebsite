@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SAC-SINGLAS Accredited Laboratory Mark
+  Certificate No.: LA-2009-0444-C
+  Red = Pantone 032C (#EF3340) | Grey = Pantone 432C (#54585A)
+  Font: Arial
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 520 370"
+     width="2600" height="1850"
+     shape-rendering="geometricPrecision"
+     text-rendering="optimizeLegibility">
+
+  <rect width="520" height="370" fill="#FFFFFF"/>
+
+  <!-- ============================================================
+       RED MARK — Pantone 032C #EF3340
+       ============================================================ -->
+
+  <!-- Left leg of A -->
+  <line x1="115" y1="46"  x2="22"  y2="258"
+        stroke="#EF3340" stroke-width="50" stroke-linecap="round"/>
+
+  <!-- Right leg of A -->
+  <line x1="115" y1="46"  x2="208" y2="258"
+        stroke="#EF3340" stroke-width="50" stroke-linecap="round"/>
+
+  <!-- White hollow — opens the A interior -->
+  <polygon points="115,98  70,238  160,238" fill="#FFFFFF"/>
+
+  <!-- Crossbar -->
+  <rect x="66" y="154" width="100" height="23" rx="3" fill="#EF3340"/>
+
+  <!-- Bold diagonal swoosh — lower-left sweeping to upper-right -->
+  <path d="M 14,215 C 52,155 95,90 245,14"
+        stroke="#EF3340" stroke-width="22"
+        stroke-linecap="round" fill="none"/>
+
+  <!-- Starburst — centre (72, 52) -->
+  <g stroke="#EF3340" stroke-linecap="round">
+    <line x1="72" y1="12"  x2="72"  y2="92"  stroke-width="9"/>
+    <line x1="32" y1="52"  x2="112" y2="52"  stroke-width="9"/>
+    <line x1="44" y1="20"  x2="100" y2="84"  stroke-width="7"/>
+    <line x1="100" y1="20" x2="44"  y2="84"  stroke-width="7"/>
+  </g>
+  <circle cx="72" cy="52" r="10" fill="#EF3340"/>
+
+  <!-- ============================================================
+       TEXT — Pantone 432C #54585A, Arial Bold
+       ============================================================ -->
+
+  <!-- "Accredited" -->
+  <text x="232" y="130"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="45" font-weight="700"
+        fill="#54585A">Accredited</text>
+
+  <!-- "Laboratory" -->
+  <text x="232" y="182"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="45" font-weight="700"
+        fill="#54585A">Laboratory</text>
+
+  <!-- "SAC-SINGLAS" -->
+  <text x="260" y="255"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="56" font-weight="700"
+        fill="#54585A" text-anchor="middle" letter-spacing="1">SAC-SINGLAS</text>
+
+  <!-- Certificate Number — replacing ZZZZ-YYY-X -->
+  <text x="260" y="315"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="32" font-weight="400"
+        fill="#54585A" text-anchor="middle" letter-spacing="0.5">LA-2009-0444-C</text>
+
+</svg>

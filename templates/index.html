@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}{{ company.name }} — {{ company.tagline }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">SAC-SINGLAS Accredited Laboratory · ISO/IEC 17025</span>
+      <h1>{{ company.tagline }}</h1>
+      <p>{{ company.name }} delivers accredited calibration, validation and
+         technical support that keep regulated industries compliant, accurate
+         and audit-ready.</p>
+      <div class="hero-actions">
+        <a href="{{ url_for('services') }}" class="btn btn-primary">Explore Services</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-ghost">Request a Quote</a>
+      </div>
+      <a class="hero-feature" href="#news">
+        <span class="hf-tag">As featured on</span>
+        <span class="hf-name">Channel NewsAsia</span>
+        <span class="hf-sub">— our Authorised Verifier (AV37) weights &amp; measures work</span>
+      </a>
+    </div>
+    <div class="hero-card">
+      <div class="dial">
+        <div class="dial-ring"></div>
+        <div class="dial-value">±0.01<span>°</span></div>
+        <div class="dial-label">Measured precision</div>
+      </div>
+      <img class="hero-card-sac"
+           src="{{ url_for('static', filename='img/sac-singlas-light.png') }}"
+           alt="SAC-SINGLAS Accredited Laboratory {{ company.sac_no }}">
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container stats-grid">
+    {% for s in stats %}
+    <div class="stat">
+      <div class="stat-value">{{ s.value }}</div>
+      <div class="stat-label">{{ s.label }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">What We Do</span>
+      <h2>Calibration & validation, end to end</h2>
+      <p>From a single instrument to a full facility qualification, our technicians
+         deliver traceable results and clear documentation.</p>
+    </div>
+    <div class="cards">
+      {% for svc in services %}
+      <article class="card{{ ' featured' if svc.featured }}">
+        <div class="card-icon icon-{{ svc.icon }}"></div>
+        <h3>{{ svc.title }}</h3>
+        <p>{{ svc.desc }}</p>
+        {% if svc.tags %}
+        <ul class="card-tags">
+          {% for t in svc.tags %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    <div class="center"><a href="{{ url_for('services') }}" class="btn btn-primary">View all services</a></div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Industries We Serve</span>
+      <h2>Built for regulated, precision-critical sectors</h2>
+    </div>
+    <div class="pill-row">
+      {% for ind in industries %}
+      <span class="pill">{{ ind }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">In the Field</span>
+      <h2>Precision work, everywhere it matters</h2>
+      <p>From reefer containers to cleanrooms and trade-use scales — see our
+         technicians at work across Singapore.</p>
+    </div>
+    <div class="gallery">
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/weights.jpg') }}" alt="Verifying a trade-use weighing scale">
+        <figcaption>Weights &amp; measures verification</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/temperature.jpg') }}" alt="Calibrating a CO2 incubator">
+        <figcaption>Temperature calibration</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/coldchain.jpg') }}" alt="Temperature mapping inside a reefer container">
+        <figcaption>Cold-chain temperature mapping</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/mapping.jpg') }}" alt="Data-logger temperature mapping">
+        <figcaption>Chamber &amp; logger mapping</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/healthcare.jpg') }}" alt="Centrifuge calibration in a hospital">
+        <figcaption>Healthcare equipment calibration</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/humidity.jpg') }}" alt="Environmental humidity sensor">
+        <figcaption>Humidity &amp; environmental</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/autoclave.jpg') }}" alt="Thermocouple calibration of an autoclave">
+        <figcaption>Autoclave calibration</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/coldroom.jpg') }}" alt="Temperature mapping of a cold room">
+        <figcaption>Cold room validation</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ url_for('static', filename='img/photos/freezer.jpg') }}" alt="Freezer calibration against a reference thermometer">
+        <figcaption>Freezer calibration</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="news">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">As featured on Channel NewsAsia</span>
+      <h2>Why verified weighing scales matter</h2>
+      <p>As a designated Authorised Verifier ({{ company.av_no }}) under Enterprise
+         Singapore's Weights &amp; Measures programme, our work supports accurate,
+         trade-use measurement — featured in CNA's report on unverified weighing
+         scales found across Singapore businesses.</p>
+    </div>
+    <div class="video-embed">
+      <iframe src="https://www.youtube-nocookie.com/embed/e_a-MoKynk4?rel=0&amp;start=136"
+              title="Nearly 300 businesses, shops in Singapore found to have unverified weighing scales in 2024 — CNA"
+              loading="lazy" allowfullscreen
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+    </div>
+    <p class="video-credit">Video: Channel NewsAsia ·
+      <a href="{{ company.cna_url }}" target="_blank" rel="noopener">Read the full article</a></p>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta-inner">
+    <div>
+      <h2>Ready to keep your measurements accurate?</h2>
+      <p>Talk to our calibration specialists about a tailored service schedule.</p>
+    </div>
+    <a href="{{ url_for('contact') }}" class="btn btn-light">Contact Us</a>
+  </div>
+</section>
+{% endblock %}

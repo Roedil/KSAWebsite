@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Contact — {{ company.name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Contact Us</span>
+    <h1>Let's talk precision</h1>
+    <p>Reach out for a quote, a service schedule, or technical advice — we respond fast.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <h2>Get in touch</h2>
+      <ul class="contact-list">
+        <li><span class="ci-icon">📞</span><div><strong>Call</strong><a href="tel:{{ company.phone_href }}">{{ company.phone }}</a></div></li>
+        <li><span class="ci-icon">💬</span><div><strong>WhatsApp</strong><a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">{{ company.whatsapp }}</a></div></li>
+        <li><span class="ci-icon">✉</span><div><strong>Email</strong><a href="mailto:{{ company.email }}">{{ company.email }}</a></div></li>
+        <li><span class="ci-icon">📍</span><div><strong>Visit</strong><span>{{ company.address }}</span></div></li>
+      </ul>
+      <div class="social social-lg">
+        <a href="{{ company.facebook }}" target="_blank" rel="noopener">Facebook</a>
+        <a href="{{ company.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <h2>Send an enquiry</h2>
+      <form method="POST" action="{{ url_for('contact') }}" class="contact-form">
+        <label>Name
+          <input type="text" name="name" required placeholder="Your name">
+        </label>
+        <label>Email
+          <input type="email" name="email" required placeholder="you@company.com">
+        </label>
+        <label>Company <span class="opt">(optional)</span>
+          <input type="text" name="company" placeholder="Company name">
+        </label>
+        <label>Message
+          <textarea name="message" rows="5" required placeholder="Tell us what you need calibrated or validated…"></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Send Enquiry</button>
+        <p class="form-note">Prefer to chat? <a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">Message us on WhatsApp</a>.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <iframe
+    title="KSA Metrology location"
+    src="https://www.google.com/maps?q=60+Kaki+Bukit+Place+Eunos+Techpark+Singapore+415979&output=embed"
+    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+{% endblock %}

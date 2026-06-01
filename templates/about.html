@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}About — {{ company.name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">About Us</span>
+    <h1>Precision is our profession</h1>
+    <p>{{ company.name }} is a Singapore-based calibration and validation
+       specialist serving regulated industries since {{ company.founded }}.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <table class="accred-table">
+      <tr>
+        <td class="accred-cert-cell">
+          <figure class="cert-figure">
+            <img src="{{ url_for('static', filename='img/sac-certificate.png') }}"
+                 alt="SAC-SINGLAS Certificate of Accreditation {{ company.sac_no }} — ISO/IEC 17025:2017, Calibration &amp; Measurement">
+          </figure>
+        </td>
+        <td class="accred-info-cell">
+          <span class="eyebrow">Accreditation</span>
+          <h2>SAC-SINGLAS accredited to ISO/IEC 17025</h2>
+          <p>Independently accredited by the Singapore Accreditation Council for
+             Calibration &amp; Measurement — Certificate {{ company.sac_no }},
+             valid to 22 August 2028.</p>
+          <div class="accred-actions">
+            <a class="btn btn-primary" href="{{ url_for('static', filename='docs/SAC-SINGLAS-Schedule-LA-2009-0444-C.pdf') }}" target="_blank" rel="noopener">View full schedule (PDF)</a>
+            <a class="btn btn-ghost-dark" href="{{ url_for('static', filename='docs/SAC-SINGLAS-Certificate-LA-2009-0444-C.pdf') }}" target="_blank" rel="noopener">View certificate (PDF)</a>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Our Team</span>
+      <h2>The people behind precise results</h2>
+    </div>
+    <figure class="team-photo">
+      <img src="{{ url_for('static', filename='img/photos/team.jpg') }}"
+           alt="The {{ company.name }} team">
+      <figcaption>The KSA Metrology team — during the 2025 external audit by the Singapore Accreditation Council</figcaption>
+    </figure>
+    <div class="culture-grid">
+      <figure class="team-culture">
+        <img src="{{ url_for('static', filename='img/photos/team-culture.jpg') }}"
+             alt="The {{ company.name }} team unwinding together after work">
+        <figcaption>Life at KSA — beyond the lab</figcaption>
+      </figure>
+      <figure class="team-culture">
+        <img src="{{ url_for('static', filename='img/photos/team-culture2.jpg') }}"
+             alt="The {{ company.name }} team relaxing together over a meal">
+        <figcaption>Life at KSA — time together</figcaption>
+      </figure>
+    </div>
+    <figure class="team-family">
+      <img src="{{ url_for('static', filename='img/photos/team-family.jpg') }}"
+           alt="The {{ company.name }} team and their families at the Christmas celebration">
+      <figcaption>Life at KSA — our Christmas family</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div>
+      <h2>Who we are</h2>
+      <p>We provide specialised calibration, validation and technical support to
+         the pharmaceutical, logistics, food and manufacturing sectors. With a
+         reputation built on trust from over {{ company.clients }} clients, we focus
+         on delivering comprehensive solutions that protect product integrity and
+         ensure quality.</p>
+      <p>Our expertise in temperature, mechanical, environmental and equipment
+         calibration helps clients meet stringent industry regulations and standards —
+         and avoid the costly errors that small measurement deviations can cause.</p>
+    </div>
+    <div>
+    <div class="about-photo">
+      <img src="{{ url_for('static', filename='img/photos/temperature.jpg') }}"
+           alt="KSA specialist calibrating laboratory equipment">
+    </div>
+    <div class="info-card">
+      <h3>At a glance</h3>
+      <ul class="checklist">
+        <li>SAC-SINGLAS accredited ({{ company.sac_no }})</li>
+        <li>ISO/IEC 17025-aligned procedures</li>
+        <li>Traceable to national measurement standards</li>
+        <li>On-site &amp; in-lab calibration</li>
+        <li>Validation: IQ / OQ / PQ</li>
+        <li>Clear, audit-ready documentation</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="stats-grid">
+      {% for s in stats %}
+      <div class="stat">
+        <div class="stat-value">{{ s.value }}</div>
+        <div class="stat-label">{{ s.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Our Values</span>
+      <h2>Why clients stay with us</h2>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="card-icon icon-shield"></div>
+        <h3>Accuracy</h3>
+        <p>Every result is traceable, repeatable and documented to withstand audit.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon icon-clipboard"></div>
+        <h3>Compliance</h3>
+        <p>We keep your equipment and processes aligned with regulatory expectations.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon icon-gauge"></div>
+        <h3>Responsiveness</h3>
+        <p>Fast turnaround and responsive technical support to minimise your downtime.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Industries We Serve</span>
+      <h2>Trusted across precision-critical sectors</h2>
+    </div>
+    <div class="pill-row">
+      {% for ind in industries %}
+      <span class="pill">{{ ind }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta-inner">
+    <div>
+      <h2>Let's discuss your calibration needs</h2>
+      <p>Our specialists are ready to help you stay compliant and accurate.</p>
+    </div>
+    <a href="{{ url_for('contact') }}" class="btn btn-light">Get in Touch</a>
+  </div>
+</section>
+{% endblock %}

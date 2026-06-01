@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}Services — {{ company.name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Our Services</span>
+    <h1>Calibration, validation & compliance</h1>
+    <p>A complete range of accredited services to keep your instruments accurate
+       and your operations compliant.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="feature">
+      <div class="feature-media">
+        <img src="{{ url_for('static', filename='img/photos/weights.jpg') }}"
+             alt="Verifying a trade-use weighing scale">
+      </div>
+      <div>
+        <span class="eyebrow">Authorised Verifier · {{ company.av_no }}</span>
+        <h3>Weights &amp; Measures verification</h3>
+        <p>As a designated Authorised Verifier under Enterprise Singapore's
+           Weights &amp; Measures programme, we verify and seal weighing and
+           measuring instruments for trade use — with ACCURACY labels registered
+           in the CPSA+ system.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-media">
+        <img src="{{ url_for('static', filename='img/photos/temperature.jpg') }}"
+             alt="Calibrating temperature-controlled equipment">
+      </div>
+      <div>
+        <span class="eyebrow">Temperature &amp; Environmental</span>
+        <h3>Calibration &amp; mapping you can trust</h3>
+        <p>Temperature sensors, data loggers, incubators, chambers and
+           warehouses — calibrated and mapped against traceable national
+           standards for cold-chain and regulated storage.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-media">
+        <img src="{{ url_for('static', filename='img/photos/coldchain.jpg') }}"
+             alt="Temperature mapping inside a reefer container">
+      </div>
+      <div>
+        <span class="eyebrow">Logistics &amp; Cold-Chain</span>
+        <h3>End-to-end cold-chain assurance</h3>
+        <p>Validation and monitoring for reefer containers, cold rooms and
+           distribution — keeping temperature-sensitive cargo compliant from
+           warehouse to delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Full Service Range</span>
+      <h2>Everything we calibrate &amp; validate</h2>
+    </div>
+    <div class="cards">
+      {% for svc in services %}
+      <article class="card{{ ' featured' if svc.featured }}">
+        <div class="card-icon icon-{{ svc.icon }}"></div>
+        <h3>{{ svc.title }}</h3>
+        <p>{{ svc.desc }}</p>
+        {% if svc.tags %}
+        <ul class="card-tags">
+          {% for t in svc.tags %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Accredited Scope &amp; Capabilities</span>
+      <h2>What we're accredited to calibrate</h2>
+      <p>Our SAC-SINGLAS accreditation (Certificate {{ company.sac_no }}) covers the
+         parameters and ranges below. CMC is our best calibration &amp; measurement
+         capability, expressed as expanded uncertainty at ~95% confidence.</p>
+    </div>
+    {% for cap in capabilities %}
+    <div class="cap-block">
+      <h3 class="cap-title">{{ cap.group }}</h3>
+      <div class="cap-table-wrap">
+        <table class="cap-table">
+          <thead>
+            <tr><th>Parameter / instrument</th><th>Range</th><th>CMC</th></tr>
+          </thead>
+          <tbody>
+            {% for param, rng, cmc in cap.rows %}
+            <tr><td>{{ param }}</td><td>{{ rng }}</td><td>{{ cmc }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="cap-actions">
+      <a class="btn btn-primary" href="{{ url_for('static', filename='docs/SAC-SINGLAS-Schedule-LA-2009-0444-C.pdf') }}" target="_blank" rel="noopener">View full SAC-SINGLAS schedule (PDF)</a>
+      <a class="btn btn-ghost btn-ghost-dark" href="{{ url_for('static', filename='docs/SAC-SINGLAS-Certificate-LA-2009-0444-C.pdf') }}" target="_blank" rel="noopener">View certificate (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How It Works</span>
+      <h2>A simple, traceable process</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step-no">1</span><h3>Consult</h3><p>We assess your equipment, standards and compliance requirements.</p></div>
+      <div class="step"><span class="step-no">2</span><h3>Calibrate</h3><p>Our technicians calibrate on-site or in-lab against traceable references.</p></div>
+      <div class="step"><span class="step-no">3</span><h3>Document</h3><p>You receive clear, audit-ready certificates and reports.</p></div>
+      <div class="step"><span class="step-no">4</span><h3>Support</h3><p>Ongoing schedules and responsive technical support keep you compliant.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta-inner">
+    <div>
+      <h2>Need a service not listed here?</h2>
+      <p>We tailor calibration and validation programmes to your equipment.</p>
+    </div>
+    <a href="{{ url_for('contact') }}" class="btn btn-light">Request a Quote</a>
+  </div>
+</section>
+{% endblock %}

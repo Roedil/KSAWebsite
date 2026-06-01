@@ -26,11 +26,13 @@
         <div class="dial-value">±0.01<span>°</span></div>
         <div class="dial-label">Measured precision</div>
       </div>
-      <div class="accred-flash" aria-label="Accreditations: SAC-SINGLAS and bizSAFE Level 3">
+      <div class="accred-flash" aria-label="Accreditations: SAC-SINGLAS, bizSAFE Level 3 and Weights & Measures ACCURACY Label">
         <img class="af-1" src="{{ url_for('static', filename='img/sac-singlas.png') }}"
              alt="SAC-SINGLAS Accredited Laboratory {{ company.sac_no }}">
         <img class="af-2" src="{{ url_for('static', filename='img/bizsafe3.png') }}"
              alt="bizSAFE Level 3 certified">
+        <img class="af-3" src="{{ url_for('static', filename='img/accuracy-label.png') }}"
+             alt="Weights &amp; Measures ACCURACY Label — Authorised Verifier {{ company.av_no }}">
       </div>
     </div>
   </div>

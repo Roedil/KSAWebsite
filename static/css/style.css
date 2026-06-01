@@ -84,12 +84,14 @@ img{max-width:100%}
     drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff)
     drop-shadow(1px -1px 0 #fff) drop-shadow(-1px 1px 0 #fff)
     drop-shadow(0 6px 14px rgba(0,0,0,.45))}
-.accred-flash .af-1{animation:accredFadeA 8s ease-in-out infinite}
-.accred-flash .af-2{animation:accredFadeB 8s ease-in-out infinite}
-@keyframes accredFadeA{0%,42%{opacity:1}50%,92%{opacity:0}100%{opacity:1}}
-@keyframes accredFadeB{0%,42%{opacity:0}50%,92%{opacity:1}100%{opacity:0}}
+.accred-flash .af-1{animation:accredFade1 9s ease-in-out infinite}
+.accred-flash .af-2{animation:accredFade2 9s ease-in-out infinite}
+.accred-flash .af-3{animation:accredFade3 9s ease-in-out infinite}
+@keyframes accredFade1{0%,30%{opacity:1}33%,97%{opacity:0}100%{opacity:1}}
+@keyframes accredFade2{0%,30%{opacity:0}33%,63%{opacity:1}66%,97%{opacity:0}100%{opacity:0}}
+@keyframes accredFade3{0%,63%{opacity:0}66%,97%{opacity:1}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){
-  .accred-flash .af-1,.accred-flash .af-2{animation:none}
+  .accred-flash .af-1,.accred-flash .af-2,.accred-flash .af-3{animation:none}
   .accred-flash .af-1{opacity:1}
 }
 .dial{position:relative;width:230px;height:230px;border-radius:50%;

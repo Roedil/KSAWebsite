@@ -94,15 +94,15 @@ img{max-width:100%}
   .accred-flash .af-1,.accred-flash .af-2,.accred-flash .af-3{animation:none}
   .accred-flash .af-1{opacity:1}
 }
-.dial{position:relative;width:230px;height:230px;border-radius:50%;
+.dial{position:relative;width:250px;height:250px;border-radius:50%;
   background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.12),rgba(255,255,255,.03));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
   border:1px solid rgba(255,255,255,.18)}
 .dial-ring{position:absolute;inset:18px;border-radius:50%;
   border:3px solid rgba(25,179,196,.5);border-top-color:var(--cyan);
   animation:spin 6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.cmc-slides{position:relative;width:100%;height:100px;display:flex;align-items:center;justify-content:center}
+.cmc-slides{position:relative;width:100%;height:80px;display:flex;align-items:center;justify-content:center}
 .cmc-slide{position:absolute;text-align:center;opacity:0;
   animation:cmcCycle 15s ease-in-out infinite}
 .cmc-slide:nth-child(1){animation-delay:0s}
@@ -118,7 +118,7 @@ img{max-width:100%}
 .cmc-value{font-size:2.2rem;font-weight:800;color:#fff;line-height:1.1}
 .cmc-value span{color:var(--cyan);font-size:1rem;margin-left:4px}
 .cmc-label{font-size:.75rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
-.cmc-subtitle{position:absolute;bottom:20px;font-size:.65rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;text-align:center;line-height:1.2}
+.cmc-subtitle{font-size:.65rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.1em;text-align:center;line-height:1.2;margin-top:4px;font-weight:700}
 .cmc-subtitle span{display:block;font-size:.55rem;letter-spacing:.15em;margin-bottom:1px}
 @media(prefers-reduced-motion:reduce){
   .cmc-slide{animation:none}

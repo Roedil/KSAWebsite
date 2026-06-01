@@ -27,7 +27,7 @@
     </div>
 
     <div class="contact-form-wrap">
-      <h2>Send an enquiry</h2>
+      <h2>Send an inquiry</h2>
       <form method="POST" action="{{ url_for('contact') }}" class="contact-form">
         <label>Name
           <input type="text" name="name" required placeholder="Your name">
@@ -41,7 +41,7 @@
         <label>Message
           <textarea name="message" rows="5" required placeholder="Tell us what you need calibrated or validated…"></textarea>
         </label>
-        <button type="submit" class="btn btn-primary">Send Enquiry</button>
+        <button type="submit" class="btn btn-primary">Send Inquiry</button>
         <p class="form-note">Prefer to chat? <a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">Message us on WhatsApp</a>.</p>
       </form>
     </div>

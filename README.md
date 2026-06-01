@@ -66,6 +66,14 @@ web: gunicorn wsgi:app --bind 0.0.0.0:$PORT --workers 3
 
 ## Contact form note
 
-The enquiry form logs submissions rather than sending email over SMTP
-(many hosts block outbound SMTP). To enable real delivery, integrate an
-email API such as SendGrid or Mailgun in the `contact()` route in `app.py`.
+The inquiry form logs every submission (as a backup) and emails it via the
+**Resend HTTP API** (Render blocks outbound SMTP). Configure these environment
+variables on the host:
+
+- `RESEND_API_KEY` — Resend API key (required to actually send mail)
+- `CONTACT_TO` — recipient inbox (default `inquiry@kalibratesolutions.com`)
+- `CONTACT_FROM` — verified sender (default `inquiry@kalibratesolutions.com`;
+  the `kalibratesolutions.com` domain must be verified in Resend)
+
+The inquirer's address is set as `reply_to`, so replies go straight to them.
+`send_test.py` is a standalone diagnostic for verifying delivery.

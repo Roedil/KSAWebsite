@@ -13,7 +13,7 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "ksa-metrology-dev-key-c
 # --- Email delivery (Resend HTTP API; works on Render where SMTP is blocked) ---
 # Set these as environment variables in Render (Environment tab):
 #   RESEND_API_KEY  — your Resend API key (required to actually send mail)
-#   CONTACT_TO      — recipient inbox (defaults to the company enquiry address)
+#   CONTACT_TO      — recipient inbox (defaults to the company inquiry address)
 #   CONTACT_FROM    — verified sender (defaults to inquiry@kalibratesolutions.com).
 #                     The kalibratesolutions.com domain must be verified in Resend.
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
@@ -22,26 +22,30 @@ CONTACT_FROM = os.environ.get("CONTACT_FROM",
                               "KSA Metrology Website <inquiry@kalibratesolutions.com>")
 
 
-def send_enquiry_email(name, email, message):
-    """Send a contact enquiry through the Resend API. Returns True on success."""
+def send_inquiry_email(name, email, message, company=""):
+    """Send a contact inquiry through the Resend API. Returns True on success."""
     if not RESEND_API_KEY:
-        app.logger.warning("RESEND_API_KEY not set — enquiry logged but not emailed.")
+        app.logger.warning("RESEND_API_KEY not set — inquiry logged but not emailed.")
         return False
 
-    text = (f"New enquiry from the KSA Metrology website\n\n"
+    company_line = f"Company: {company}\n" if company else ""
+    text = (f"New inquiry from the KSA Metrology website\n\n"
             f"Name:  {name}\n"
-            f"Email: {email}\n\n"
+            f"Email: {email}\n"
+            f"{company_line}\n"
             f"Message:\n{message}\n")
-    html = (f"<h2>New website enquiry</h2>"
+    company_html = (f"<strong>Company:</strong> {company}<br>" if company else "")
+    html = (f"<h2>New website inquiry</h2>"
             f"<p><strong>Name:</strong> {name}<br>"
-            f"<strong>Email:</strong> <a href='mailto:{email}'>{email}</a></p>"
+            f"<strong>Email:</strong> <a href='mailto:{email}'>{email}</a><br>"
+            f"{company_html}</p>"
             f"<p><strong>Message:</strong></p>"
             f"<p style='white-space:pre-wrap'>{message}</p>")
     payload = {
         "from": CONTACT_FROM,
         "to": [CONTACT_TO],
         "reply_to": email,
-        "subject": f"New website enquiry from {name}",
+        "subject": f"New website inquiry from {name}",
         "text": text,
         "html": html,
     }
@@ -227,16 +231,17 @@ def contact():
     if request.method == "POST":
         name = (request.form.get("name") or "").strip()
         email = (request.form.get("email") or "").strip()
+        company = (request.form.get("company") or "").strip()
         message = (request.form.get("message") or "").strip()
 
         if not name or not email or not message:
             flash("Please fill in your name, email and message.", "error")
             return redirect(url_for("contact"))
 
-        # Always log the enquiry as a backup, then email it via Resend.
-        app.logger.info("Enquiry from %s <%s>: %s", name, email, message)
-        send_enquiry_email(name, email, message)
-        flash("Thank you! Your enquiry has been received — we'll be in touch shortly.",
+        # Always log the inquiry as a backup, then email it via Resend.
+        app.logger.info("Inquiry from %s <%s> [%s]: %s", name, email, company, message)
+        send_inquiry_email(name, email, message, company)
+        flash("Thank you! Your inquiry has been received — we'll be in touch shortly.",
               "success")
         return redirect(url_for("contact"))
 

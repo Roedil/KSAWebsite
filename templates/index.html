@@ -6,7 +6,7 @@
   <div class="container hero-inner">
     <div class="hero-copy">
       <span class="eyebrow">SAC-SINGLAS Accredited Laboratory · ISO/IEC 17025</span>
-      <h1>{{ company.tagline }}</h1>
+      <h1>Precision<br>Calibration &amp;<br>Validation<br>You Can Trust</h1>
       <p>{{ company.name }} delivers accredited calibration, validation and
          technical support that keep regulated industries compliant, accurate
          and audit-ready.</p>
@@ -77,6 +77,53 @@
 <section class="section">
   <div class="container">
     <div class="section-head">
+      <span class="eyebrow">What's New</span>
+      <h2>Latest updates from KSA Metrology</h2>
+    </div>
+    <div class="news-grid">
+      {% for item in whatsnews %}
+      <article class="news-card" data-img="{{ url_for('static', filename=item.img) }}"
+               data-alt="{{ item.img_alt }}" data-date="{{ item.date }}"
+               data-title="{{ item.title }}" data-desc="{{ item.desc }}">
+        <div class="news-card-img">
+          <img src="{{ url_for('static', filename=item.img) }}" alt="{{ item.img_alt }}">
+        </div>
+        <div class="news-card-body">
+          <span class="news-date">{{ item.date }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.desc }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <script>
+    document.querySelectorAll('.news-card').forEach(function(card){
+      card.addEventListener('click',function(){
+        var m=document.createElement('div');
+        m.className='news-modal';
+        m.innerHTML='<div class="news-modal-inner">'+
+          '<button class="news-modal-close" aria-label="Close">&times;</button>'+
+          '<img class="news-modal-img" src="'+card.dataset.img+'" alt="'+card.dataset.alt+'">'+
+          '<div class="news-modal-body">'+
+          '<span class="news-date">'+card.dataset.date+'</span>'+
+          '<h3>'+card.dataset.title+'</h3>'+
+          '<p>'+card.dataset.desc+'</p></div></div>';
+        document.body.appendChild(m);
+        requestAnimationFrame(function(){m.classList.add('open')});
+        m.querySelector('.news-modal-close').onclick=m.onclick=function(e){
+          if(e.target===m||e.target.classList.contains('news-modal-close')){
+            m.classList.remove('open');setTimeout(function(){m.remove()},260);
+          }
+        };
+      });
+    });
+    </script>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
       <span class="eyebrow">What We Do</span>
       <h2>Calibration & validation, end to end</h2>
       <p>From a single instrument to a full facility qualification, our technicians
@@ -100,7 +147,7 @@
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Industries We Serve</span>
@@ -109,29 +156,6 @@
     <div class="pill-row">
       {% for ind in industries %}
       <span class="pill">{{ ind }}</span>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">What's New</span>
-      <h2>Latest updates from KSA Metrology</h2>
-    </div>
-    <div class="news-grid">
-      {% for item in whatsnews %}
-      <article class="news-card">
-        <div class="news-card-img">
-          <img src="{{ url_for('static', filename=item.img) }}" alt="{{ item.img_alt }}">
-        </div>
-        <div class="news-card-body">
-          <span class="news-date">{{ item.date }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.desc }}</p>
-        </div>
-      </article>
       {% endfor %}
     </div>
   </div>

@@ -452,3 +452,54 @@ img{max-width:100%}
   .cmc-value{font-size:1.7rem}
   .hero-actions .btn{width:100%;text-align:center}
 }
+
+/* ── Client logos marquee ────────────────────────────────────── */
+.clients{
+  background:var(--navy);
+  padding:48px 0 52px;
+  text-align:center;
+  overflow:hidden;
+}
+.clients .eyebrow{color:var(--accent)}
+.clients h2{color:#fff;margin:8px 0 28px}
+.marquee-track{overflow:hidden;position:relative}
+.marquee-slide{
+  display:flex;
+  gap:40px;
+  align-items:center;
+  width:max-content;
+  animation:marquee 25s linear infinite;
+}
+.marquee-track:hover .marquee-slide{animation-play-state:paused}
+.client-logo{
+  flex-shrink:0;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;
+  padding:16px 32px;
+  color:rgba(255,255,255,0.35);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:1px;
+  white-space:nowrap;
+  filter:grayscale(1);
+  transition:background .2s,filter .2s;
+}
+.client-logo:hover{
+  background:rgba(255,255,255,0.12);
+  filter:grayscale(0);
+}
+@keyframes marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+@media(max-width:900px){
+  .marquee-slide{gap:28px}
+  .client-logo{padding:12px 22px;font-size:12px}
+}
+@media(max-width:640px){
+  .clients{padding:36px 0 40px}
+  .clients h2{font-size:1.4rem}
+  .marquee-slide{gap:20px}
+  .client-logo{padding:10px 18px;font-size:11px}
+}

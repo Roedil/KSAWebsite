@@ -455,13 +455,13 @@ img{max-width:100%}
 
 /* ── Client logos marquee ────────────────────────────────────── */
 .clients{
-  background:var(--navy);
+  background:#fff;
   padding:48px 0 52px;
   text-align:center;
   overflow:hidden;
 }
-.clients .eyebrow{color:var(--cyan)}
-.clients h2{color:#fff;margin:8px 0 28px}
+.clients .eyebrow{color:var(--navy)}
+.clients h2{color:var(--navy);margin:8px 0 28px}
 .marquee-track{overflow:hidden;position:relative}
 .marquee-slide{
   display:flex;
@@ -472,22 +472,29 @@ img{max-width:100%}
 .marquee-track:hover .marquee-slide{animation-play-state:paused}
 .client-logo{
   flex-shrink:0;
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.1);
+  background:#fff;
+  border:1px solid #e0e0e0;
   border-radius:8px;
-  padding:16px 32px;
+  padding:14px 24px;
   margin-right:40px;
-  color:rgba(255,255,255,0.35);
-  font-weight:700;
-  font-size:13px;
-  letter-spacing:1px;
-  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   filter:grayscale(1);
-  transition:background .2s,filter .2s;
+  opacity:0.6;
+  transition:background .2s,filter .2s,opacity .2s,box-shadow .2s;
+}
+.client-logo img{
+  height:40px;
+  width:auto;
+  object-fit:contain;
 }
 .client-logo:hover{
-  background:rgba(255,255,255,0.12);
+  background:#f8f8f8;
+  border-color:#ccc;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
   filter:grayscale(0);
+  opacity:1;
 }
 @keyframes marquee{
   0%{transform:translateX(0)}

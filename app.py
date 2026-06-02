@@ -261,8 +261,8 @@ WHATSNEWS = [
                 "calibration and verification services closer to our clients "
                 "across Southeast Asia. Located in Bacolod City, "
                 "Negros Occidental.",
-        "img": "photos/team-culture.jpg",
-        "img_alt": "KSA Metrology team celebrating our expansion to the Philippines",
+        "img": "photos/NewOffice.jpg",
+        "img_alt": "KSA Supplies & Service Inc. — new office in Bacolod City, Philippines",
     },
     {
         "date": "May 2026",

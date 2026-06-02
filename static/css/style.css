@@ -475,7 +475,8 @@ img{max-width:100%}
   background:#fff;
   border:1px solid #e0e0e0;
   border-radius:8px;
-  padding:14px 24px;
+  width:140px;
+  height:64px;
   margin-right:40px;
   display:flex;
   align-items:center;
@@ -484,8 +485,10 @@ img{max-width:100%}
   transition:background .2s,opacity .2s,box-shadow .2s;
 }
 .client-logo img{
-  height:40px;
+  max-width:110px;
+  max-height:44px;
   width:auto;
+  height:auto;
   object-fit:contain;
 }
 .client-logo:hover{
@@ -503,10 +506,12 @@ img{max-width:100%}
   .client-logo{margin-right:0}
 }
 @media(max-width:900px){
-  .client-logo{padding:12px 22px;font-size:12px;margin-right:28px}
+  .client-logo{width:120px;height:56px;margin-right:28px}
+  .client-logo img{max-width:94px;max-height:38px}
 }
 @media(max-width:640px){
   .clients{padding:36px 0 40px}
   .clients h2{font-size:1.4rem}
-  .client-logo{padding:10px 18px;font-size:11px;margin-right:20px}
+  .client-logo{width:100px;height:48px;margin-right:20px}
+  .client-logo img{max-width:78px;max-height:32px}
 }

@@ -261,26 +261,8 @@ WHATSNEWS = [
                 "calibration and verification services closer to our clients "
                 "across Southeast Asia. Located in Bacolod City, "
                 "Negros Occidental.",
-        "img": "photos/NewOffice.jpg",
+        "img": "img/photos/NewOffice.jpg",
         "img_alt": "KSA Supplies & Services Inc. — new office in Bacolod City, Philippines",
-    },
-    {
-        "date": "May 2026",
-        "title": "Floor Scale & Balance Calibration",
-        "desc": "We've added floor scale calibration and precision balance "
-                "calibration to our accredited services — supporting heavier "
-                "instruments up to 1 000 kg with traceable national standards.",
-        "img": "photos/floorscale.jpg",
-        "img_alt": "Floor scale calibration and verification by KSA technicians",
-    },
-    {
-        "date": "April 2026",
-        "title": "Updated Calibration Capabilities",
-        "desc": "Our SAC-SINGLAS accredited scope now includes RTD sensor "
-                "calibration, expanded temperature mapping services, and "
-                "enhanced humidity measurement capabilities.",
-        "img": "photos/temperature-rtd.jpg",
-        "img_alt": "RTD temperature sensor calibration",
     },
 ]
 

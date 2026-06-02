@@ -117,6 +117,29 @@
 <section class="section">
   <div class="container">
     <div class="section-head">
+      <span class="eyebrow">What's New</span>
+      <h2>Latest updates from KSA Metrology</h2>
+    </div>
+    <div class="news-grid">
+      {% for item in whatsnews %}
+      <article class="news-card">
+        <div class="news-card-img">
+          <img src="{{ url_for('static', filename=item.img) }}" alt="{{ item.img_alt }}">
+        </div>
+        <div class="news-card-body">
+          <span class="news-date">{{ item.date }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.desc }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
       <span class="eyebrow">In the Field</span>
       <h2>Precision work, everywhere it matters</h2>
       <p>From reefer containers to cleanrooms and trade-use scales — see our

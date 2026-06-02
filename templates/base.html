@@ -71,7 +71,8 @@
         <a href="tel:{{ company.phone_href }}">📞 {{ company.phone }}</a>
         <a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">💬 WhatsApp {{ company.whatsapp }}</a>
         <a href="mailto:{{ company.email }}">✉ {{ company.email }}</a>
-        <p class="footer-address">📍 {{ company.address }}</p>
+        <p class="footer-address">📍 Singapore: {{ company.address }}</p>
+        <p class="footer-address">📍 Philippines: {{ company.ph_company }} — {{ company.ph_address }}</p>
         <div class="social">
           <a href="{{ company.facebook }}" target="_blank" rel="noopener">Facebook</a>
           <a href="{{ company.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>

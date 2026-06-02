@@ -18,7 +18,8 @@
         <li><span class="ci-icon">📞</span><div><strong>Call</strong><a href="tel:{{ company.phone_href }}">{{ company.phone }}</a></div></li>
         <li><span class="ci-icon">💬</span><div><strong>WhatsApp</strong><a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">{{ company.whatsapp }}</a></div></li>
         <li><span class="ci-icon">✉</span><div><strong>Email</strong><a href="mailto:{{ company.email }}">{{ company.email }}</a></div></li>
-        <li><span class="ci-icon">📍</span><div><strong>Visit</strong><span>{{ company.address }}</span></div></li>
+        <li><span class="ci-icon">📍</span><div><strong>Singapore</strong><span>{{ company.address }}</span></div></li>
+        <li><span class="ci-icon">📍</span><div><strong>Philippines</strong><span>{{ company.ph_company }} — {{ company.ph_address }}</span></div></li>
       </ul>
       <div class="social social-lg">
         <a href="{{ company.facebook }}" target="_blank" rel="noopener">Facebook</a>
@@ -50,8 +51,15 @@
 
 <section class="map-section">
   <iframe
-    title="KSA Metrology location"
+    title="KSA Metrology Singapore location"
     src="https://www.google.com/maps?q=60+Kaki+Bukit+Place+Eunos+Techpark+Singapore+415979&output=embed"
+    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
+<section class="map-section">
+  <iframe
+    title="KSA Supplies & Service Inc. Philippines location"
+    src="https://www.google.com/maps?q=Solid+Manila+Building+Corner+Lacson+San+Sebastian+Bacolod+City+Negros+Occidental+Philippines&output=embed"
     loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>
 {% endblock %}

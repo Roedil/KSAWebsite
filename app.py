@@ -125,6 +125,8 @@ COMPANY = {
     "email": "inquiry@kalibratesolutions.com",
     "website": "www.kalibratesolutions.com",
     "address": "60 Kaki Bukit Place, #06-16 (Lobby A – Exit B), Eunos Techpark, Singapore 415979",
+    "ph_address": "Unit 2, Solid Manila Building, Corner Lacson and San Sebastian Streets, Barangay 32, Bacolod City, Negros Occidental 6100, Philippines",
+    "ph_company": "KSA Supplies & Service Inc.",
     "facebook": "https://www.facebook.com/KSAMetrologyPteLtd",
     "linkedin": "https://www.linkedin.com/company/ksa-metrology-pte-ltd",
     "founded": 2014,
@@ -250,6 +252,38 @@ STATS = [
     {"value": "AV37", "label": "Authorised Verifier"},
 ]
 
+WHATSNEWS = [
+    {
+        "date": "June 2026",
+        "title": "New Office in the Philippines",
+        "desc": "KSA Metrology is expanding! KSA Supplies & Service Inc., "
+                "a company of KSA Metrology Pte Ltd, brings accredited "
+                "calibration and verification services closer to our clients "
+                "across Southeast Asia. Located in Bacolod City, "
+                "Negros Occidental.",
+        "img": "photos/team-culture.jpg",
+        "img_alt": "KSA Metrology team celebrating our expansion to the Philippines",
+    },
+    {
+        "date": "May 2026",
+        "title": "Floor Scale & Balance Calibration",
+        "desc": "We've added floor scale calibration and precision balance "
+                "calibration to our accredited services — supporting heavier "
+                "instruments up to 1 000 kg with traceable national standards.",
+        "img": "photos/floorscale.jpg",
+        "img_alt": "Floor scale calibration and verification by KSA technicians",
+    },
+    {
+        "date": "April 2026",
+        "title": "Updated Calibration Capabilities",
+        "desc": "Our SAC-SINGLAS accredited scope now includes RTD sensor "
+                "calibration, expanded temperature mapping services, and "
+                "enhanced humidity measurement capabilities.",
+        "img": "photos/temperature-rtd.jpg",
+        "img_alt": "RTD temperature sensor calibration",
+    },
+]
+
 
 @app.context_processor
 def inject_company():
@@ -260,7 +294,7 @@ def inject_company():
 @app.route("/")
 def index():
     return render_template("index.html", services=SERVICES, stats=STATS,
-                           industries=INDUSTRIES)
+                           industries=INDUSTRIES, whatsnews=WHATSNEWS)
 
 
 @app.route("/about")

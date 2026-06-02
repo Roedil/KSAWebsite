@@ -126,7 +126,7 @@ COMPANY = {
     "website": "www.kalibratesolutions.com",
     "address": "60 Kaki Bukit Place, #06-16 (Lobby A – Exit B), Eunos Techpark, Singapore 415979",
     "ph_address": "Unit 2, Solid Manila Building, Corner Lacson and San Sebastian Streets, Barangay 32, Bacolod City, Negros Occidental 6100, Philippines",
-    "ph_company": "KSA Supplies & Service Inc.",
+    "ph_company": "KSA Supplies & Services Inc.",
     "facebook": "https://www.facebook.com/KSAMetrologyPteLtd",
     "linkedin": "https://www.linkedin.com/company/ksa-metrology-pte-ltd",
     "founded": 2014,
@@ -256,13 +256,13 @@ WHATSNEWS = [
     {
         "date": "June 2026",
         "title": "New Office in the Philippines",
-        "desc": "KSA Metrology is expanding! KSA Supplies & Service Inc., "
+        "desc": "KSA Metrology is expanding! KSA Supplies & Services Inc., "
                 "a company of KSA Metrology Pte Ltd, brings accredited "
                 "calibration and verification services closer to our clients "
                 "across Southeast Asia. Located in Bacolod City, "
                 "Negros Occidental.",
         "img": "photos/NewOffice.jpg",
-        "img_alt": "KSA Supplies & Service Inc. — new office in Bacolod City, Philippines",
+        "img_alt": "KSA Supplies & Services Inc. — new office in Bacolod City, Philippines",
     },
     {
         "date": "May 2026",

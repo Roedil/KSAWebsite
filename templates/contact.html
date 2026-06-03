@@ -30,6 +30,7 @@
     <div class="contact-form-wrap">
       <h2>Send an inquiry</h2>
       <form method="POST" action="{{ url_for('contact') }}" class="contact-form">
+        <input type="text" name="url" id="contact-url" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <label>Name
           <input type="text" name="name" required placeholder="Your name">
         </label>

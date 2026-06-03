@@ -1,8 +1,10 @@
 """KSA Metrology Pte Ltd — company website (Flask)."""
 import json
 import os
+import time
 import urllib.error
 import urllib.request
+from collections import defaultdict
 from html import escape
 
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -21,6 +23,22 @@ RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
 CONTACT_TO = os.environ.get("CONTACT_TO", "inquiry@kalibratesolutions.com")
 CONTACT_FROM = os.environ.get("CONTACT_FROM",
                               "KSA Metrology Website <inquiry@kalibratesolutions.com>")
+
+
+# --- Contact-form abuse protection ---
+_form_submissions: dict[str, list[float]] = defaultdict(list)
+_RATE_LIMIT = 5     # max POST submissions
+_RATE_WINDOW = 3600  # per this many seconds (1 hour)
+
+def _contact_rate_limited(ip: str) -> bool:
+    now = time.time()
+    cutoff = now - _RATE_WINDOW
+    recent = [t for t in _form_submissions[ip] if t > cutoff]
+    _form_submissions[ip] = recent
+    if len(recent) >= _RATE_LIMIT:
+        return True
+    _form_submissions[ip].append(now)
+    return False
 
 
 def send_inquiry_email(name, email, message, company=""):
@@ -293,6 +311,12 @@ def services():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
+        # Honeypot — invisible to humans; bots tend to fill it
+        if (request.form.get("url") or "").strip():
+            flash("Thank you! Your inquiry has been received — we'll be in touch shortly.",
+                  "success")
+            return redirect(url_for("contact"))
+
         name = (request.form.get("name") or "").strip()
         email = (request.form.get("email") or "").strip()
         company = (request.form.get("company") or "").strip()
@@ -302,7 +326,17 @@ def contact():
             flash("Please fill in your name, email and message.", "error")
             return redirect(url_for("contact"))
 
-        # Always log the inquiry as a backup, then email it via Resend.
+        # Field length caps
+        if len(name) > 100 or len(email) > 254 or len(company) > 200 or len(message) > 5000:
+            flash("One or more fields exceeds the allowed length.", "error")
+            return redirect(url_for("contact"))
+
+        # Rate limit: 5 submissions per IP per hour
+        ip = request.remote_addr or "unknown"
+        if _contact_rate_limited(ip):
+            flash("Too many submissions. Please wait a while before trying again.", "error")
+            return redirect(url_for("contact"))
+
         app.logger.info("Inquiry from %s <%s> [%s]: %s", name, email, company, message)
         send_inquiry_email(name, email, message, company)
         flash("Thank you! Your inquiry has been received — we'll be in touch shortly.",

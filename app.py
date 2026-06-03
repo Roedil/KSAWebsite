@@ -24,6 +24,13 @@ CONTACT_TO = os.environ.get("CONTACT_TO", "inquiry@kalibratesolutions.com")
 CONTACT_FROM = os.environ.get("CONTACT_FROM",
                               "KSA Metrology Website <inquiry@kalibratesolutions.com>")
 
+# --- hCaptcha ---
+# Set these in Render's Environment tab:
+#   HCAPTCHA_SITE_KEY   — public site key (also used in the HTML template)
+#   HCAPTCHA_SECRET_KEY — secret key for server-side verification
+HCAPTCHA_SITE_KEY = os.environ.get("HCAPTCHA_SITE_KEY", "")
+HCAPTCHA_SECRET_KEY = os.environ.get("HCAPTCHA_SECRET_KEY", "")
+
 
 # --- Contact-form abuse protection ---
 _form_submissions: dict[str, list[float]] = defaultdict(list)
@@ -39,6 +46,28 @@ def _contact_rate_limited(ip: str) -> bool:
         return True
     _form_submissions[ip].append(now)
     return False
+
+
+def _verify_hcaptcha(token: str) -> bool:
+    """Return True if the hCaptcha token is valid. Skip check when no secret is configured."""
+    if not HCAPTCHA_SECRET_KEY:
+        return True  # dev/test: skip verification
+    if not token:
+        return False
+    payload = f"secret={HCAPTCHA_SECRET_KEY}&response={token}".encode()
+    req = urllib.request.Request(
+        "https://hcaptcha.com/siteverify",
+        data=payload,
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            result = json.loads(resp.read())
+            return bool(result.get("success"))
+    except Exception as exc:  # noqa: BLE001
+        app.logger.error("hCaptcha verification failed: %s", exc)
+        return False
 
 
 def send_inquiry_email(name, email, message, company=""):
@@ -331,6 +360,12 @@ def contact():
             flash("One or more fields exceeds the allowed length.", "error")
             return redirect(url_for("contact"))
 
+        # hCaptcha verification
+        captcha_token = request.form.get("h-captcha-response", "")
+        if not _verify_hcaptcha(captcha_token):
+            flash("CAPTCHA verification failed. Please try again.", "error")
+            return redirect(url_for("contact"))
+
         # Rate limit: 5 submissions per IP per hour
         ip = request.remote_addr or "unknown"
         if _contact_rate_limited(ip):
@@ -343,7 +378,7 @@ def contact():
               "success")
         return redirect(url_for("contact"))
 
-    return render_template("contact.html")
+    return render_template("contact.html", hcaptcha_site_key=HCAPTCHA_SITE_KEY)
 
 
 if __name__ == "__main__":

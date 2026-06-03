@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Contact — {{ company.name }}{% endblock %}
 
+{% block head_extra %}
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+{% endblock %}
+
 {% block content %}
 <section class="page-hero">
   <div class="container">
@@ -43,6 +47,9 @@
         <label>Message
           <textarea name="message" rows="5" required placeholder="Tell us what you need calibrated or validated…"></textarea>
         </label>
+        {% if hcaptcha_site_key %}
+        <div class="h-captcha" data-sitekey="{{ hcaptcha_site_key }}"></div>
+        {% endif %}
         <button type="submit" class="btn btn-primary">Send Inquiry</button>
         <p class="form-note">Prefer to chat? <a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">Message us on WhatsApp</a>.</p>
       </form>

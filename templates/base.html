@@ -12,6 +12,7 @@
   <link rel="icon" type="image/png" sizes="256x256" href="{{ url_for('static', filename='img/favicon.png') }}">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head_extra %}{% endblock %}
 </head>
 <body>
   <header class="site-header" id="top">

@@ -126,7 +126,7 @@ img{max-width:100%}
 
 /* ---- stats ---- */
 .stats{background:var(--white);margin-top:-36px;position:relative;z-index:5}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;
   background:#fff;border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:30px 24px}
 .stat{text-align:center}

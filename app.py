@@ -297,6 +297,7 @@ STATS = [
     {"value": "10+", "label": "Years of expertise"},
     {"value": "SAC-SINGLAS", "label": "Accredited laboratory"},
     {"value": "AV37", "label": "Authorised Verifier"},
+    {"value": "bizSAFE 3", "label": "Committed to Workplace Safety Excellence"},
 ]
 
 WHATSNEWS = [

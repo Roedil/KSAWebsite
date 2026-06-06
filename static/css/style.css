@@ -84,7 +84,7 @@ img{max-width:100%}
     drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff)
     drop-shadow(1px -1px 0 #fff) drop-shadow(-1px 1px 0 #fff)
     drop-shadow(0 6px 14px rgba(0,0,0,.45))}
-.accred-flash .af-1{animation:accredFade1 9s ease-in-out infinite;max-width:95%;max-height:90%;border-radius:14px;box-shadow:0 0 0 4px #fff,0 6px 16px rgba(0,0,0,.45);filter:none}
+.accred-flash .af-1{animation:accredFade1 9s ease-in-out infinite;max-width:95%;max-height:90%;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.5);filter:saturate(1.35) contrast(1.08) brightness(1.04)}
 .accred-flash .af-2{animation:accredFade2 9s ease-in-out infinite}
 .accred-flash .af-3{animation:accredFade3 9s ease-in-out infinite}
 @keyframes accredFade1{0%,30%{opacity:1}33%,97%{opacity:0}100%{opacity:1}}

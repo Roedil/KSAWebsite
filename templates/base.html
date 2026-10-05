@@ -7,7 +7,7 @@
   <meta name="description" content="{{ company.name }} — SAC-SINGLAS accredited ({{ company.sac_no }}), ISO/IEC 17025 calibration, validation and technical support for pharmaceutical, logistics, food and manufacturing industries in Singapore.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32.png') }}">
   <link rel="icon" type="image/png" sizes="256x256" href="{{ url_for('static', filename='img/favicon.png') }}">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
@@ -15,6 +15,14 @@
   {% block head_extra %}{% endblock %}
 </head>
 <body>
+  <div class="cred-strip">
+    <div class="container cred-strip-inner">
+      <span>SAC-SINGLAS {{ company.sac_no }}</span>
+      <span>ISO/IEC 17025:2017</span>
+      <span>{{ company.av_scheme }} {{ company.av_no }}</span>
+      <span>bizSAFE Level 3</span>
+    </div>
+  </div>
   <header class="site-header" id="top">
     <div class="container nav-wrap">
       <a class="brand" href="{{ url_for('index') }}">
@@ -69,11 +77,26 @@
       </div>
       <div>
         <h4>Get in Touch</h4>
-        <a href="tel:{{ company.phone_href }}">📞 {{ company.phone }}</a>
-        <a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">💬 WhatsApp {{ company.whatsapp }}</a>
-        <a href="mailto:{{ company.email }}">✉ {{ company.email }}</a>
-        <p class="footer-address">📍 Singapore: {{ company.address }}</p>
-        <p class="footer-address">📍 Philippines: {{ company.ph_company }} — {{ company.ph_address }}</p>
+        <a href="tel:{{ company.phone_href }}">
+          <svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          {{ company.phone }}
+        </a>
+        <a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">
+          <svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          WhatsApp {{ company.whatsapp }}
+        </a>
+        <a href="mailto:{{ company.email }}">
+          <svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          {{ company.email }}
+        </a>
+        <p class="footer-address">
+          <svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Singapore: {{ company.address }}
+        </p>
+        <p class="footer-address">
+          <svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Philippines: {{ company.ph_company }} — {{ company.ph_address }}
+        </p>
         <div class="social">
           <a href="{{ company.facebook }}" target="_blank" rel="noopener">Facebook</a>
           <a href="{{ company.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
@@ -87,5 +110,24 @@
       </div>
     </div>
   </footer>
+  <script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!els.length) return;
+    if((window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || !('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('revealed'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  })();
+  </script>
 </body>
 </html>

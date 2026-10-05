@@ -13,7 +13,7 @@
 
 <section class="section">
   <div class="container">
-    <div class="feature">
+    <div class="feature reveal">
       <div class="feature-media">
         <img src="{{ url_for('static', filename='img/photos/weights.jpg') }}"
              alt="Verifying a trade-use weighing scale">
@@ -27,7 +27,7 @@
            in the CPSA+ system.</p>
       </div>
     </div>
-    <div class="feature">
+    <div class="feature reveal">
       <div class="feature-media">
         <img src="{{ url_for('static', filename='img/photos/temperature.jpg') }}"
              alt="Calibrating temperature-controlled equipment">
@@ -40,7 +40,7 @@
            standards for cold-chain and regulated storage.</p>
       </div>
     </div>
-    <div class="feature">
+    <div class="feature reveal">
       <div class="feature-media">
         <img src="{{ url_for('static', filename='img/photos/coldchain.jpg') }}"
              alt="Temperature mapping inside a reefer container">
@@ -53,7 +53,7 @@
            warehouse to delivery.</p>
       </div>
     </div>
-    <div class="feature">
+    <div class="feature reveal">
       <div class="feature-media">
         <img src="{{ url_for('static', filename='img/photos/floorscale.jpg') }}"
              alt="Floor scale calibration and verification">
@@ -66,7 +66,7 @@
            for accurate weighing.</p>
       </div>
     </div>
-    <div class="feature">
+    <div class="feature reveal">
       <div class="feature-media">
         <img src="{{ url_for('static', filename='img/photos/balance.jpg') }}"
              alt="Precision balance calibration with certified weights">
@@ -84,7 +84,7 @@
 
 <section class="section">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Accredited Scope &amp; Capabilities</span>
       <h2>What we're accredited to calibrate</h2>
       <p>Our SAC-SINGLAS accreditation (Certificate {{ company.sac_no }}) covers the
@@ -92,7 +92,7 @@
          capability, expressed as expanded uncertainty at ~95% confidence.</p>
     </div>
     {% for cap in capabilities %}
-    <div class="cap-block">
+    <div class="cap-block reveal">
       <h3 class="cap-title">{{ cap.group }}</h3>
       <div class="cap-table-wrap">
         <table class="cap-table">
@@ -113,15 +113,15 @@
 
 <section class="section section-alt">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">How It Works</span>
       <h2>A simple, traceable process</h2>
     </div>
     <div class="steps">
-      <div class="step"><span class="step-no">1</span><h3>Consult</h3><p>We assess your equipment, standards and compliance requirements.</p></div>
-      <div class="step"><span class="step-no">2</span><h3>Calibrate</h3><p>Our technicians calibrate on-site or in-lab against traceable references.</p></div>
-      <div class="step"><span class="step-no">3</span><h3>Document</h3><p>You receive clear, audit-ready certificates and reports.</p></div>
-      <div class="step"><span class="step-no">4</span><h3>Support</h3><p>Ongoing schedules and responsive technical support keep you compliant.</p></div>
+      <div class="step reveal" style="transition-delay:0s"><span class="step-no">1</span><h3>Consult</h3><p>We assess your equipment, standards and compliance requirements.</p></div>
+      <div class="step reveal" style="transition-delay:.07s"><span class="step-no">2</span><h3>Calibrate</h3><p>Our technicians calibrate on-site or in-lab against traceable references.</p></div>
+      <div class="step reveal" style="transition-delay:.14s"><span class="step-no">3</span><h3>Document</h3><p>You receive clear, audit-ready certificates and reports.</p></div>
+      <div class="step reveal" style="transition-delay:.21s"><span class="step-no">4</span><h3>Support</h3><p>Ongoing schedules and responsive technical support keep you compliant.</p></div>
     </div>
   </div>
 </section>

@@ -16,14 +16,14 @@
 
 <section class="section">
   <div class="container contact-grid">
-    <div class="contact-info">
+    <div class="contact-info reveal">
       <h2>Get in touch</h2>
       <ul class="contact-list">
-        <li><span class="ci-icon">📞</span><div><strong>Call</strong><a href="tel:{{ company.phone_href }}">{{ company.phone }}</a></div></li>
-        <li><span class="ci-icon">💬</span><div><strong>WhatsApp</strong><a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">{{ company.whatsapp }}</a></div></li>
-        <li><span class="ci-icon">✉</span><div><strong>Email</strong><a href="mailto:{{ company.email }}">{{ company.email }}</a></div></li>
-        <li><span class="ci-icon">📍</span><div><strong>Singapore</strong><span>{{ company.address }}</span></div></li>
-        <li><span class="ci-icon">📍</span><div><strong>Philippines</strong><span>{{ company.ph_company }} — {{ company.ph_address }}</span></div></li>
+        <li><span class="ci-icon"><svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><strong>Call</strong><a href="tel:{{ company.phone_href }}">{{ company.phone }}</a></div></li>
+        <li><span class="ci-icon"><svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><div><strong>WhatsApp</strong><a href="https://wa.me/{{ company.whatsapp_href }}" target="_blank" rel="noopener">{{ company.whatsapp }}</a></div></li>
+        <li><span class="ci-icon"><svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><div><strong>Email</strong><a href="mailto:{{ company.email }}">{{ company.email }}</a></div></li>
+        <li><span class="ci-icon"><svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><div><strong>Singapore</strong><span>{{ company.address }}</span></div></li>
+        <li><span class="ci-icon"><svg class="ficon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><div><strong>Philippines</strong><span>{{ company.ph_company }} — {{ company.ph_address }}</span></div></li>
       </ul>
       <div class="social social-lg">
         <a href="{{ company.facebook }}" target="_blank" rel="noopener">Facebook</a>
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="contact-form-wrap">
+    <div class="contact-form-wrap reveal" style="transition-delay:.1s">
       <h2>Send an inquiry</h2>
       <form method="POST" action="{{ url_for('contact') }}" class="contact-form">
         <input type="text" name="url" id="contact-url" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true">

@@ -13,7 +13,7 @@
 
 <section class="section">
   <div class="container">
-    <table class="accred-table">
+    <table class="accred-table reveal">
       <tr>
         <td class="accred-cert-cell">
           <figure class="cert-figure">
@@ -39,7 +39,7 @@
 
 <section class="section section-alt">
   <div class="container two-col">
-    <div>
+    <div class="reveal">
       <h2>Who we are</h2>
       <p>We provide specialised calibration, validation and technical support to
          the pharmaceutical, logistics, food and manufacturing sectors. With a
@@ -50,7 +50,7 @@
          calibration helps clients meet stringent industry regulations and standards —
          and avoid the costly errors that small measurement deviations can cause.</p>
     </div>
-    <div>
+    <div class="reveal" style="transition-delay:.1s">
     <div class="about-photo">
       <img src="{{ url_for('static', filename='img/photos/temperature.jpg') }}"
            alt="KSA specialist calibrating laboratory equipment">
@@ -74,7 +74,7 @@
   <div class="container">
     <div class="stats-grid">
       {% for s in stats %}
-      <div class="stat">
+      <div class="stat reveal" style="transition-delay:{{ loop.index0 * 0.07 }}s">
         <div class="stat-value">{{ s.value }}</div>
         <div class="stat-label">{{ s.label }}</div>
       </div>
@@ -85,22 +85,22 @@
 
 <section class="section">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Our Values</span>
       <h2>Why clients stay with us</h2>
     </div>
     <div class="cards">
-      <article class="card">
+      <article class="card reveal" style="transition-delay:0s">
         <div class="card-icon icon-shield"></div>
         <h3>Accuracy</h3>
         <p>Every result is traceable, repeatable and documented to withstand audit.</p>
       </article>
-      <article class="card">
+      <article class="card reveal" style="transition-delay:.06s">
         <div class="card-icon icon-clipboard"></div>
         <h3>Compliance</h3>
         <p>We keep your equipment and processes aligned with regulatory expectations.</p>
       </article>
-      <article class="card">
+      <article class="card reveal" style="transition-delay:.12s">
         <div class="card-icon icon-gauge"></div>
         <h3>Responsiveness</h3>
         <p>Fast turnaround and responsive technical support to minimise your downtime.</p>
@@ -111,11 +111,11 @@
 
 <section class="section section-alt">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Industries We Serve</span>
       <h2>Trusted across precision-critical sectors</h2>
     </div>
-    <div class="pill-row">
+    <div class="pill-row reveal">
       {% for ind in industries %}
       <span class="pill">{{ ind }}</span>
       {% endfor %}
